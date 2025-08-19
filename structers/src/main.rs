@@ -1,12 +1,15 @@
+#[derive(Clone)]
 struct User {
     active: bool,
     username: String,
     sign_in_count: u64,
+    email: String,
 }
 
 fn main() {
 
 // alttakine tuple deniyor. bunun structure den farkı okunabilirliği düşük ve kullanımı zor ama ufak gruplar için daha hızlı bir çözüm
+// tupleda alanların adı yoktur sadece sırası ve tipi vardır
     let tup: (bool, i32, &str) = (true, 42, "alice");
 
     // index ile erişim
@@ -21,12 +24,47 @@ fn main() {
         active: true,
         username: String::from("alice"),
         sign_in_count: 5,
+        email: String::from("alice@example.com"),
     };
+
+    
 
     // Alanlara erişim
     println!("username = {}", user1.username);
     println!("active   = {}", user1.active);
     println!("sign in count = {}", user1.sign_in_count);
+    println!("email = {}", user1.email);
+
+    // let user2 = User {
+    // active: user1.active,
+    // username: user1.username,
+    // email: String::from("another@example.com"),
+    // sign_in_count: user1.sign_in_count,
+    // };
+
+
+    // büyük oranda aynı kalacak yeni bir structure oluşturuyorsan üsttekini değil alttakini kullan işleri hızlandırır
+    let user2 = User {
+    email: String::from("another@example.com"),
+    ..user1.clone() // user1'in diğer alanlarını kopyalar
+    };
+
+    println!("user1.active = {}", user1.active);  // structure içindeki verilere buradaki user1.active gibi erişiriz
+    println!("user2 email = {}", user2.email);
+
+
+    // tuple struct da aynı tuple gibi ama alanların adı vardır 
+    struct Color(i32, i32, i32);   // RGB için
+    struct Point(i32, i32, i32);   // Nokta için
+
+    let black = Color(0, 0, 0);   // siyah renk
+    let origin = Point(0, 0, 0);  // koordinat orijini
+    
+    // erişim tuple gibi
+    println!("R: {}", black.0);  // black.0 demek black tuplesinin 0. indexindeki eleman
+    println!("X: {}", origin.0);
+
+
 
 }
 
