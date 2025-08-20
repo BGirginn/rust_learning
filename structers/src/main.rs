@@ -1,4 +1,11 @@
-#[derive(Clone)]
+//! her bir derive kısmı her struct için bağımsız en başa hepsini tanımlayamazsın her birini kendi struct'ının üstüne yazmalısın
+#[derive(Debug)] // bunu kullanarak structun println! ile yazdırılmasını sağlarsın   println!("rect1 is {rect1:?}"); seklinde
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+#[derive(Clone)]  // bu satır struct'ın clonelanabilir olmasını sağlar
 struct User {
     active: bool,
     username: String,
@@ -57,12 +64,12 @@ fn main() {
     struct Color(i32, i32, i32);   // RGB için
     struct Point(i32, i32, i32);   // Nokta için
 
-    let black = Color(0, 0, 0);   // siyah renk
-    let origin = Point(0, 0, 0);  // koordinat orijini
+    let black = Color(0, 8, 0);   // siyah renk
+    let origin = Point(0, 0, 15);  // koordinat orijini
     
     // erişim tuple gibi
-    println!("R: {}", black.0);  // black.0 demek black tuplesinin 0. indexindeki eleman
-    println!("X: {}", origin.0);
+    println!("R: {}", black.1);  // black.0 demek black tuplesinin 0. indexindeki eleman
+    println!("X: {}", origin.2);
 
 
     let width1 = 30;
@@ -73,6 +80,20 @@ fn main() {
         area(width1, height1)
     );
 
+    let scale = 2;
+    let rect1 = Rectangle {
+        width: 30 * scale,
+        height: 50,
+    };
+
+    // 1️⃣ {:?} → kısa debug print
+    println!("1) rect1 is {:?}", rect1);
+
+    // 2️⃣ {:#?} → pretty debug print
+    println!("2) rect1 is {:#?}", rect1);
+
+    // 3️⃣ dbg! → dosya + satır + değer
+    dbg!(&rect1);
 }
 
 fn area(width: u32, height: u32) -> u32 {
