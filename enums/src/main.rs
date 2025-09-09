@@ -1,19 +1,14 @@
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right,
-}
-
-fn move_player(dir: Direction) {
-    match dir {
-        Direction::Up => println!("Yukarı"),
-        Direction::Down => println!("Aşağı"),
-        Direction::Left => println!("Sola"),
-        Direction::Right => println!("Sağa"),
+enum Islem{
+        Toplama(i32,i32),
+        Metin(&'static str),
+        Sifirla,
     }
-}
 
-fn main() {
-    move_player(Direction::Up);
+fn islem_yap(islem:Islem) {
+    match islem {
+        Islem::Toplama(a, b) => println!("Toplam: {}", a + b),
+        Islem::Metin(metin) => println!("Metin: {}", metin),
+        Islem::Sifirla => println!("Sıfırlandı!"),
+    }
+    
 }
