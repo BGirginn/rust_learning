@@ -4,12 +4,12 @@
 fn main() {
 
     //&str ile string arasındaki fark String e atanan yazı push vesaire ile dinamik olarak değiştirilebilirken &str sabittir ve değiştirilemez.
-    //! &str de değişkene veri atanmış olmalı ancak String ile dışarıdan veri alınımı yapılabilir. &str ile input yapılamaz
+    // &str de değişkene veri atanmış olmalı ancak String ile dışarıdan veri alınımı yapılabilir. &str ile input yapılamaz
     let s1 = String::from("hello"); // s1 sahibi
 
     let s2 = s1; // sahiplik s2'ye geçti (move)
 
-    //! println!("{}", s1); // ❌ hata: s1 artık sahibi değil
+    // println!("{}", s1); // ❌ hata: s1 artık sahibi değil
     println!("{}", s2); // ✔ s2 yazdırılabilir
 
     let s1 = String::from("hello");
